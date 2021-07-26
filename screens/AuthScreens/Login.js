@@ -8,12 +8,7 @@ export default class Login extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        <Text>Login page</Text>
-        <TouchableOpacity 
-        style={{backgroundColor: 'black', padding: 10, margin: 10, borderRadius: 5}}
-        onPress={()=> this.props.navigation.navigate('Signup')}>
-          <Text style={{color: 'white'}}>Go to signup page</Text>
-        </TouchableOpacity>
+        
       </View>
     );
   }
