@@ -8,7 +8,7 @@ export default class Login extends React.Component {
   render(){
     return (
       <View style={styles.container}>
-        
+        <Text>Isso é um puta de um desrespeito.</Text>
       </View>
     );
   }
