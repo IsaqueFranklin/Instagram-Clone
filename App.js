@@ -1,23 +1,23 @@
-import {Component } from 'react'
-import { StatusBar } from 'expo-status-bar';
+import { Component } from 'react'
 import React from 'react';
-import { StyleSheet, Switch, Text, View } from 'react-native';
 import SwitchNavigator from './navigation/LoginNavigator'
+import thunkMiddleware from 'redux-thunk';
+import reducer from './reducers/index'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+
+
+const middleware = applyMiddleware(thunkMiddleware)
+const store = createStore(reducer, middleware)
+
 
 export default class App extends React.Component {
   
   render(){
     return (
-      <SwitchNavigator />
+      <Provider store={store}>
+        <SwitchNavigator />
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
