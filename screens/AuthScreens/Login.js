@@ -24,9 +24,9 @@ class Login extends React.Component {
           <TextInput 
           style={{height: 50, width: screenWidth*0.9, color: 'black', paddingHorizontal: 20, margin: 0, borderRadius:10, borderColor: 'grey', borderWidth: 1}}
           placeholderTextColor={'grey'} 
-          placeholder={'example@example.com'} />
+          placeholder={'example@example.com'} 
           onChangeText={input=>this.props.updateEmail(input)}
-          value={this.props.user.email}
+          value={this.props.user.email} />
 
           <View style={{width:screenWidth*0.9, marginTop:10,}}>
               <Text style={{left:15}}>Password</Text>
@@ -38,7 +38,7 @@ class Login extends React.Component {
           placeholder={'Passcode123'} 
           onChangeText={input=>this.props.updatePassword(input)}
           value={this.props.user.password}
-          securityTextEntry={true} />
+          secureTextEntry={true} />
 
           <View style={{width: '100%', justifyContent: 'center', alignItems: 'center', marginTop: 30}}>
             <TouchableOpacity style={{width: screenWidth*0.6, height: 50, borderRadius: 30, backgroundColor: '#0095f6', justifyContent: 'center', alignItems: 'center'}}>
