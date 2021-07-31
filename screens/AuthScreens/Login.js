@@ -41,7 +41,8 @@ class Login extends React.Component {
           secureTextEntry={true} />
 
           <View style={{width: '100%', justifyContent: 'center', alignItems: 'center', marginTop: 30}}>
-            <TouchableOpacity style={{width: screenWidth*0.6, height: 50, borderRadius: 30, backgroundColor: '#0095f6', justifyContent: 'center', alignItems: 'center'}}>
+            <TouchableOpacity style={{width: screenWidth*0.6, height: 50, borderRadius: 30, backgroundColor: '#0095f6', justifyContent: 'center', alignItems: 'center'}}
+            onPress={()=>alert(this.props.email)}>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{alignItems: 'center', flexDirection: 'row', margin:10}}>
