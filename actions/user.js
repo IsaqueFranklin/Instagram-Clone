@@ -1,4 +1,4 @@
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
 import db from '../config/Firebase'
 
 export const updateEmail = (input) => {
@@ -22,7 +22,8 @@ export const signup = () => {
             
             if(response.user.uid){
                 const user = {
-                    username: user.username,
+                    uid: response.user.uid,
+                    username: username,
                     email: email,
                     posts: [],
                     bio: '',
@@ -30,7 +31,7 @@ export const signup = () => {
                     photo: '',
                 }
 
-                db.collection('users').doc(response.user.uid).set(user)
+                await db.collection('users').doc(response.user.uid).set(user)
                 dispatch({ type: 'LOGIN', payload: user})
                 alert('User has been signed up!')
             }

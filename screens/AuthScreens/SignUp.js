@@ -40,7 +40,7 @@ class Signup extends React.Component {
           placeholderTextColor={'grey'} 
           placeholder={'Your username'} 
           onChangeText={input=>this.props.updateUsername(input)}
-          value={this.props.user.email} />
+          value={this.props.user.username} />
 
           <View style={{width:screenWidth*0.9, marginTop:10,}}>
               <Text style={{left:15}}>Email</Text>
