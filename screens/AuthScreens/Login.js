@@ -45,7 +45,8 @@ class Login extends React.Component {
             onPress={()=>alert(this.props.email)}>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>Login</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center', flexDirection: 'row', margin:10}}>
+            <TouchableOpacity style={{alignItems: 'center', flexDirection: 'row', margin:10}}
+            onPress={() => this.props.navigation.navigate('Signup')}>
                 <Text style={{fontSize: 18}}>Don't have an account? </Text>
                 <Text style={{fontSize: 18, fontWeight: 'bold', color: '#0095f6'}}>Sign Up</Text>
             </TouchableOpacity>

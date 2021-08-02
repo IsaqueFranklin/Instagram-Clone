@@ -5,7 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword, updateUsername } from '../../actions/user'
+import { signup, updateEmail, updatePassword, updateUsername } from '../../actions/user'
 
 
 const screenWidth = Dimensions.get('window').width
@@ -19,8 +19,8 @@ class Signup extends React.Component {
   }
 
   onLoginPress  = () => {
-    if(this.props.user.password == this.state.repeat){
-      alert('the passwords are identical')
+    if(this.props.user.password == this.state.repeat && this.props.user.username !== ''){
+      this.props.signup()
     } else {
       alert('the passwords are not identical')
     }
@@ -82,9 +82,10 @@ class Signup extends React.Component {
             onPress={()=>this.onLoginPress()}>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>SignUp</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center', flexDirection: 'row', margin:10}}>
-                <Text style={{fontSize: 18}}>Don't have an account? </Text>
-                <Text style={{fontSize: 18, fontWeight: 'bold', color: '#0095f6'}}>Sign Up</Text>
+            <TouchableOpacity style={{alignItems: 'center', flexDirection: 'row', margin:10}}
+            onPress={() => this.props.navigation.navigate('Login')}>
+                <Text style={{fontSize: 18}}>Already have an account? </Text>
+                <Text style={{fontSize: 18, fontWeight: 'bold', color: '#0095f6'}}>Login</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
 
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ updateEmail, updatePassword, updateUsername }, dispatch)
+  return bindActionCreators({ signup, updateEmail, updatePassword, updateUsername }, dispatch)
 }
 
 const mapStateToProps = (state) => {
