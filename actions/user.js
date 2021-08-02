@@ -40,3 +40,33 @@ export const signup = () => {
         }
     }
 }
+
+export const login = () => {
+    return async (dispatch, getState) => {
+        try {
+            const { email, password } = getState().user
+            const response = await firebase.auth().signInWithEmailAndPassword(email, password)
+
+            dispatch(getUser(response.user.uid))
+        } catch(e){
+            alert(e)
+        }
+    }
+}
+
+export const getUser = (uid) => {
+    return async (dispatch) => {
+        const userQuery = await db.collection('users').doc(uid).get()
+        let user = userQuery.data()
+
+        let posts = []
+        const postQuery = await db.collection('posts').where('uid', '==', uid).get()
+
+        postQuery.forEach(function(response){
+            posts.push(response.data())
+        })
+        user.posts = orderBy(posts, 'data', 'desc')
+
+        dispatch({ type: 'LOGIN', payload:user})
+    }
+}

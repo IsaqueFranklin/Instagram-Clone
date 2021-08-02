@@ -29,6 +29,7 @@ class Signup extends React.Component {
   render(){
     return (
       <View style={styles.container}>
+        <Text style={{fontSize:35, fontFamily: 'logo-font', marginTop: 0}}>NotInstagram</Text>
         <Text>SignUp page</Text>
 
           <View style={{width:screenWidth*0.9, marginTop:10,}}>
