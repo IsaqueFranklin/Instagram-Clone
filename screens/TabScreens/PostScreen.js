@@ -1,18 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions, SafeAreaView, Platform } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { getUser } from '../../actions/user'
+
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
 
 
 class PostScreen extends React.Component {
   
   render(){
     return (
-      <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>PostScreen</Text>
-      </View>
+      <SafeAreaView style={{flex: 1}}>
+          <View style={(Platform.OS == 'ios' ? {width: screenWidth, height:55, borderBottomColor: 'grey', borderBottomWidth:1} : {width: screenWidth, height: 55, borderBottomColor:'grey', borderBottomWidth:1, marginTop:30, justifyContent: 'space-between', alignItems: 'center', flexDirection:'row'})}>
+              <Text style={{margin:10, fontWeight: 'bold', fontSize:22}}>Create a new post</Text>
+              <TouchableOpacity style={{margin:10}}>
+                  <Text style={{margin:10, fontWeight: 'bold', fontSize:22, color:'#007aff'}}>Upload</Text>
+              </TouchableOpacity>
+          </View>
+      </SafeAreaView>
     );
   }
 }
