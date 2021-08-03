@@ -39,7 +39,7 @@ class Welcome extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({  }, dispatch)
+    return bindActionCreators({getUser}, dispatch)
 }
 
 const mapStateToProps = (state) => {

@@ -1,16 +1,14 @@
 import * as React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native'
-import firebase from 'firebase/app'
 
-export default function App() {
+import { createStackNavigator } from '@react-navigation/stack';
+import TabNavigator from './TabNavigator';
 
-        return (
-            <View style={{flex:1, backgroundColor: 'white'}}>
-                <Text>You are now logged in</Text>
+const Stack = createStackNavigator();
 
-                <TouchableOpacity onPress={() => firebase.auth().signOut()}>
-                    <Text style={{color: 'blue'}}>Log me out</Text>
-                </TouchableOpacity>
-            </View>
-        )
+export default function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}} />
+    </Stack.Navigator>
+  );
 }
