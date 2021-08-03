@@ -15,7 +15,7 @@ class Welcome extends React.Component {
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
                 getUser(user.uid)
-                if(this.props.user != null){
+                if(this.props.user !== null){
                     this.props.navigation.navigate('StackNavigator')
                     this.props.navigation.reset({
                         index:0,
@@ -31,12 +31,7 @@ class Welcome extends React.Component {
   render(){
     return (
       <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
-          <Text>Waiting</Text>
-          <TouchableOpacity style={{alignItems: 'center', flexDirection: 'row', margin:10}}
-            onPress={() => this.props.navigation.navigate('Login')}>
-                <Text style={{fontSize: 18}}>Already have an account? </Text>
-                <Text style={{fontSize: 18, fontWeight: 'bold', color: '#0095f6'}}>Login</Text>
-            </TouchableOpacity>
+            <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60}}>NotInstagram</Text>
       </View>
     );
   }
