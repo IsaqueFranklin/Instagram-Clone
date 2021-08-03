@@ -4,7 +4,7 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { updateEmail, updatePassword } from '../../actions/user'
+import { updateEmail, updatePassword, login } from '../../actions/user'
 
 
 const screenHeight = Dimensions.get('window').height
@@ -42,7 +42,7 @@ class Login extends React.Component {
 
           <View style={{width: '100%', justifyContent: 'center', alignItems: 'center', marginTop: 30}}>
             <TouchableOpacity style={{width: screenWidth*0.6, height: 50, borderRadius: 30, backgroundColor: '#0095f6', justifyContent: 'center', alignItems: 'center'}}
-            onPress={()=>alert(this.props.email)}>
+            onPress={()=>this.props.login()}>
                 <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{alignItems: 'center', flexDirection: 'row', margin:10}}
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ updateEmail, updatePassword }, dispatch)
+  return bindActionCreators({ updateEmail, updatePassword, login }, dispatch)
 }
 
 const mapStateToProps = (state) => {

@@ -7,7 +7,8 @@ import { Assets, createStackNavigator } from '@react-navigation/stack';
 
 import Login from '../screens/AuthScreens/Login'
 import Signup from '../screens/AuthScreens/SignUp'
-
+import Welcome from '../screens/AuthScreens/Welcome'
+import StackNavigator from './StackNavigator'
 
 const Stack = createStackNavigator();
 
@@ -23,8 +24,10 @@ export default function App() {
         return (
             <NavigationContainer>
                 <Stack.Navigator>
+                    <Stack.Screen name='Welcome' component={Welcome} options={{headerShown: false}} />
                     <Stack.Screen name='Login' component={Login} options={{headerShown: false, title: 'Login'}} />
                     <Stack.Screen name='Signup' component={Signup} />
+                    <Stack.Screen name='StackNavigator' component={StackNavigator} />
                 </Stack.Navigator>
             </NavigationContainer>
         )
