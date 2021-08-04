@@ -11,7 +11,7 @@ class HomeScreen extends React.Component {
   render(){
     return (
       <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>HomeScreen</Text>
+            <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>Home</Text>
       </View>
     );
   }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions, SafeAreaView, Platform, Image } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-
+import { uploadPhoto } from '../../actions/index'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -14,6 +14,10 @@ const screenHeight = Dimensions.get('window').height
 
 class PostScreen extends React.Component {
 
+  state = {
+    url:undefined
+  }
+
   openLibrary = async () => {
     try {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
@@ -22,9 +26,8 @@ class PostScreen extends React.Component {
           allowsEditing: true,
         })
         if(!image.cancelled){
-          //const url = await this.props.uploadPhoto(image)
-          alert('Image has been uploaded.')
-          alert(image.uri)
+          const url = await this.props.uploadPhoto(image)
+          this.setState({url:url})
         }
       }
     } catch(error) {
@@ -43,7 +46,10 @@ class PostScreen extends React.Component {
           </View>
 
           <View style={{width:screenWidth, height:360,}}>
-              <Image source={require('../../assets/images/image.jpg')} style={{width:screenWidth, height:360,}} />
+              {(this.state.url == undefined) ? 
+                <Image source={require('../../assets/images/image.jpg')} style={{width:screenWidth, height:360,}} />
+              : <Image source={{uri: this.state.url}} style={{width:screenWidth, height:360,}} />
+              }
           </View>
 
           <View style={{flexDirection: 'row', width:screenWidth, justifyContent: 'center', alignItems: 'center'}}>
@@ -61,7 +67,7 @@ class PostScreen extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getUser }, dispatch)
+    return bindActionCreators({ getUser, uploadPhoto }, dispatch)
 }
 
 const mapStateToProps = (state) => {

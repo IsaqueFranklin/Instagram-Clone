@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'
 import db from '../config/Firebase'
+import { orderBy } from 'lodash'
+
 
 export const updateEmail = (input) => {
     return {type: 'UPDATE_EMAIL', payload: input}
