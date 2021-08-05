@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions, SafeAr
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { uploadPhoto } from '../../actions/index'
+import { updateNextPhoto } from '../../actions/post'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -15,7 +16,7 @@ const screenHeight = Dimensions.get('window').height
 class PostScreen extends React.Component {
 
   state = {
-    url:undefined
+    url:undefined,
   }
 
   openLibrary = async () => {
@@ -27,7 +28,8 @@ class PostScreen extends React.Component {
         })
         if(!image.cancelled){
           const url = await this.props.uploadPhoto(image)
-          this.setState({url:url})
+          //this.setState({url:url})
+          this.props.updateNextPhoto(url)
         }
       }
     } catch(error) {
@@ -59,6 +61,13 @@ class PostScreen extends React.Component {
                       <Text style={{color:'white', fontSize:30}}>+</Text>
                   </View>
               </TouchableOpacity>
+              {
+                this.props.post.photos?.map(e=>
+                  <View>
+                    <Image source={{uri: e}} style={{width:95, height:90, backgroundColor:'rgba(0, 0, 0, 0.1)'}} />
+                  </View>
+                )
+              }
           </View>
       </SafeAreaView>
     );
@@ -67,12 +76,13 @@ class PostScreen extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getUser, uploadPhoto }, dispatch)
+    return bindActionCreators({ getUser, uploadPhoto, updateNextPhoto }, dispatch)
 }
 
 const mapStateToProps = (state) => {
     return{
         user: state.user,
+        post: state.post
     }
 }
 
