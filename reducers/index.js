@@ -19,6 +19,8 @@ const post = (state = {}, action) => {
     switch (action.type) {
         case 'UPDATE_POST_NEXT_PHOTO':
             return { ...state, photos: action.payload}
+        case 'UPDATE_DESCRIPTION':
+            return {...state, description: action.payload}
         default:
             return state
     }

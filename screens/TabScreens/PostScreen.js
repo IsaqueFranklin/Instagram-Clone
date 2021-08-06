@@ -52,13 +52,18 @@ class PostScreen extends React.Component {
       this.setState({urlChosen: undefined})
     }
   }
+
+  uploadPost = () => {
+    this.props.navigation.navigate('PostCheckout')
+  }
   
   render(){
     return (
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: '#f5f5dc'}}>
           <View style={(Platform.OS == 'ios' ? {width: screenWidth, height:55, borderBottomColor: 'grey', borderBottomWidth:1} : {width: screenWidth, height: 55, borderBottomColor:'blue', borderBottomWidth:1, marginTop:30, justifyContent: 'space-between', alignItems: 'center', flexDirection:'row'})}>
               <Text style={{margin:10, fontWeight: 'bold', fontSize:22}}>Create a new post</Text>
-              <TouchableOpacity style={{margin:10}}>
+              <TouchableOpacity style={{margin:10}}
+            st  onPress={() => this.uploadPost()}>
                   <Text style={{margin:10, fontWeight: 'bold', fontSize:22, color:'#007aff'}}>Upload</Text>
               </TouchableOpacity>
           </View>

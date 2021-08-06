@@ -14,8 +14,10 @@ export default function MyTabs() {
   return (
     <Tab.Navigator 
     initialRouteName="Home"
-    activeColor="#fff"
-    inactiveColor="#fff"
+    activeColor="black"
+    inactiveColor="gray"
+    barStyle={{ backgroundColor: '#f5f5dc' }}
+
     >
       <Tab.Screen name="Home" component={HomeScreen} 
         options={{

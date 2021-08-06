@@ -26,7 +26,11 @@ export default function App() {
                 <Stack.Navigator>
                     <Stack.Screen name='Welcome' component={Welcome} options={{headerShown: false}} />
                     <Stack.Screen name='Login' component={Login} options={{headerShown: false, title: 'Login'}} />
-                    <Stack.Screen name='Signup' component={Signup} />
+                    <Stack.Screen name='Signup' component={Signup} options={{
+                        headerStyle: {
+                            backgroundColor: '#f5f5dc'
+                        }
+                    }} />
                     <Stack.Screen name='StackNavigator' component={StackNavigator} options={{headerShown: false}} />
                 </Stack.Navigator>
             </NavigationContainer>
