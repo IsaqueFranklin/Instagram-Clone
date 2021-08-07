@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 import PostCheckout from '../screens/TabScreens/upload/PostCheckout'
-import { uploadPost } from '../actions/post'
+import { uploadPost, getPosts } from '../actions/post'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -13,6 +13,13 @@ import { connect } from 'react-redux'
 const Stack = createStackNavigator();
 
 class MyStack extends React.Component {
+
+  uploadPost = () => {
+    this.props.navigation.navigate('TabNavigator')
+    alert('Posted!')
+    this.props.uploadPost()
+    this.props.getPosts()
+  }
 
   render() {
     return (
@@ -24,7 +31,7 @@ class MyStack extends React.Component {
           headerTitle: 'See your post',
           headerRight: () => (
               <TouchableOpacity style={{margin:22, flexDirection: 'row'}}
-              onPress={()=> this.props.uploadPost()}>
+              onPress={()=> this.uploadPost()}>
                 <Text style={{color: 'blue', fontWeight: 'bold', fontSize:22, marginHorizontal:5, bottom:0}}>Post</Text>
                   <FontAwesome name='check' color={'blue'} size={25} style={{top:2}} />
               </TouchableOpacity>
@@ -36,7 +43,7 @@ class MyStack extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ uploadPost }, dispatch)
+  return bindActionCreators({ uploadPost, getPosts }, dispatch)
 }
 
 const mapStateToProps = (state) => {
