@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 import PostCheckout from '../screens/TabScreens/upload/PostCheckout'
-import { uploadPost, getPosts } from '../actions/post'
+import { uploadPost } from '../actions/post'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -14,11 +14,11 @@ const Stack = createStackNavigator();
 
 class MyStack extends React.Component {
 
-  uploadPost = () => {
+  uploadPost=()=>{
     this.props.navigation.navigate('TabNavigator')
-    alert('Posted!')
+    //alert('posted')
     this.props.uploadPost()
-    this.props.getPosts()
+    //this.props.getPosts()
   }
 
   render() {
@@ -43,7 +43,7 @@ class MyStack extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ uploadPost, getPosts }, dispatch)
+  return bindActionCreators({ uploadPost }, dispatch)
 }
 
 const mapStateToProps = (state) => {
