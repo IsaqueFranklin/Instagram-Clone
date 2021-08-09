@@ -9,6 +9,7 @@ import Login from '../screens/AuthScreens/Login'
 import Signup from '../screens/AuthScreens/SignUp'
 import Welcome from '../screens/AuthScreens/Welcome'
 import StackNavigator from './StackNavigator'
+import ProfilePicture from '../screens/AuthScreens/ProfilePicture';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,11 @@ export default function App() {
                     <Stack.Screen name='Welcome' component={Welcome} options={{headerShown: false}} />
                     <Stack.Screen name='Login' component={Login} options={{headerShown: false, title: 'Login'}} />
                     <Stack.Screen name='Signup' component={Signup} options={{
+                        headerStyle: {
+                            backgroundColor: '#f5f5dc'
+                        }
+                    }} />
+                    <Stack.Screen name='ProfilePicture' component={ProfilePicture} options={{
                         headerStyle: {
                             backgroundColor: '#f5f5dc'
                         }
