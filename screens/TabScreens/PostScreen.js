@@ -85,28 +85,28 @@ class PostScreen extends React.Component {
               }
           </View>
 
-          <View style={{flexDirection: 'row', width:screenWidth, justifyContent: 'center', alignItems: 'center'}}>
-              {
-                (this.props.post.photos == undefined || this.props.post.photos?.length == 3 || this.props.post.photos?.length == 0)
-                ? null
-                :
-                <TouchableOpacity style={{width:95, height:90, backgroundColor:'rgba(0, 0, 0, 0.1)', justifyContent: 'center', alignItems: 'center', borderRadius:12, margin:5}}
-                onPress={() => this.openLibrary()}>
-                    <View style={{width:40, height:40, borderRadius:20, backgroundColor:'rgba(0, 0, 0, 0.1)', justifyContent: 'center', alignItems: 'center'}}>
-                        <Text style={{color:'white', fontSize:30}}>+</Text>
-                    </View>
-                </TouchableOpacity>
-              }
-              
-              {
-                this.props.post.photos?.map(e=>
-                  <TouchableOpacity
-                  onPress={() => this.changeChosenUrl(e)}>
-                    <Image source={{uri: e}} style={{width:95, height:90, backgroundColor:'rgba(0, 0, 0, 0.1)', borderRadius:12, margin:5}} />
-                  </TouchableOpacity>
-                )
-              }
-          </View>
+          <View style={{flexDirection:'row', width:screenWidth, justifyContent:'center',alignItems:'center', flex:1}}>
+                    {
+                        (this.props.post.photos == undefined || this.props.post.photos?.length == 3  || this.props.post.photos?.length == 0)
+                        ?
+                        null
+                        :
+                        <TouchableOpacity style={{width:95, height:90, backgroundColor:'rgba(0,0,0,0.1)', justifyContent:'center', alignItems:'center', borderRadius:12, margin:10 }}
+                        onPress={()=> this.openLibrary()}>
+                            <View style={{width:40, height:40, borderRadius:20, backgroundColor:'rgba(0,0,0,0.1)', justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{color:'white', fontSize:30}}>+</Text>
+                            </View>
+                        </TouchableOpacity>
+                    }
+                    {
+                        this.props.post.photos?.map(e=>
+                            <TouchableOpacity
+                            onPress={()=> this.changeChosenUrl(e)}>
+                                <Image source={{uri: e}} style={{width:95, height:90, backgroundColor:'rgba(0,0,0,0.1)', borderRadius:12, margin:10}} />
+                            </TouchableOpacity>
+                        )
+                    }
+                </View>
       </SafeAreaView>
     );
   }

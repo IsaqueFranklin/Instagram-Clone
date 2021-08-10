@@ -9,6 +9,8 @@ import { uploadPost } from '../actions/post'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
+import { getUser } from '../actions/user'
+
 
 const Stack = createStackNavigator();
 
@@ -43,7 +45,7 @@ class MyStack extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ uploadPost }, dispatch)
+  return bindActionCreators({ getUser, uploadPost }, dispatch)
 }
 
 const mapStateToProps = (state) => {

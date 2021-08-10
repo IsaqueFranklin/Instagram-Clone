@@ -1,10 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, FlatList, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, FlatList, TextInput, TouchableOpacity, View, Image, Dimensions } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { getUser } from '../../actions/user'
 import { getPosts } from '../../actions/post'
+
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
+
 
 class HomeScreen extends React.Component {
   

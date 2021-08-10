@@ -50,7 +50,7 @@ export const signup = () => {
 export const login = () => {
     return async (dispatch, getState) => {
         try {
-            const { email, password } = getState().user
+            const { email, password, username, photo } = getState().user
             const response = await firebase.auth().signInWithEmailAndPassword(email, password)
 
             dispatch(getUser(response.user.uid))
@@ -73,6 +73,6 @@ export const getUser = (uid) => {
         })
         user.posts = orderBy(posts, 'data', 'desc')
 
-        dispatch({ type: 'LOGIN', payload:user})
+        dispatch({type: 'LOGIN', payload: user})
     }
 }

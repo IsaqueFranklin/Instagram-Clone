@@ -1,4 +1,4 @@
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
 import db from '../config/Firebase'
 import uuid from 'uuid'
 
@@ -46,7 +46,7 @@ export const removeImage = (photoToRemove) => {
 export const uploadPost = () => {
     return async ( dispatch, getState )=>{
         try {
-            const {post, user} = getState()
+            const { post, user } = getState()
             
             const id = uuid.v4()
             const upload = {
@@ -71,6 +71,7 @@ export const uploadPost = () => {
 
 export const getPosts = (numberOfPosts) => {
     return async (dispatch, getState) => {
+
         const posts = await db.collection('posts').orderBy('date', 'desc').limit(numberOfPosts).get()
 
         let array = []
