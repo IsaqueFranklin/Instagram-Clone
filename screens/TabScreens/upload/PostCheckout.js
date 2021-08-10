@@ -4,7 +4,7 @@ import { StyleSheet, Image, ScrollView, Text, TextInput, TouchableOpacity, View,
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
-import { updateDescription } from '../../../actions/post'
+import { updateDescription, uploadPost } from '../../../actions/post'
 
 
 const screenWidth = Dimensions.get('window').width
@@ -41,7 +41,7 @@ class PostCheckout extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ updateDescription }, dispatch)
+    return bindActionCreators({ updateDescription, uploadPost }, dispatch)
 }
 
 const mapStateToProps = (state) => {

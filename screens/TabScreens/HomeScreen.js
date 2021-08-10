@@ -1,17 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, FlatList, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { getUser } from '../../actions/user'
-
+import { getPosts } from '../../actions/post'
 
 class HomeScreen extends React.Component {
   
+
+  componentDidMount = () => {
+    this.props.getPosts(10)
+  }
+
+
   render(){
     return (
       <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
             <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>Home</Text>
+            <FlatList 
+            data={this.props.post.feed}
+            keyExtractor={(item) => JSON.stringify(item.uid)}
+            renderItem={({item}) => (
+              <View>
+                  <Image source={{uri:item.photos[0]}} style={{width:screenWidth, height:360,}} />
+              </View>
+            )}
+            />
       </View>
     );
   }
@@ -19,12 +34,13 @@ class HomeScreen extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getUser }, dispatch)
+    return bindActionCreators({ getUser, getPosts }, dispatch)
 }
 
 const mapStateToProps = (state) => {
     return{
         user: state.user,
+        post: state.post
     }
 }
 
