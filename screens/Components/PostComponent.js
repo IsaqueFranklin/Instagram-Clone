@@ -61,8 +61,8 @@ export default class PostComponent extends React.Component {
                 <Text style={{color:'grey', marginTop:5}}>Add a comment...</Text>
             </View>
             <Image source={require('../../assets/images/flame.png')} style={{width:25, height:25, margin: 15}} />
-            <Text style={{color:'grey', marginTop:5}}>{moment(this.props.item.date).format('ll')}.</Text>
           </View>
+          <Text style={{color:'grey', margin:10}}>{moment(this.props.item.date).format('ll')}.</Text>
         </View>
     );
   }
