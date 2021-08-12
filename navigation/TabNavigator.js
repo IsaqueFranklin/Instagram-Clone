@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import HomeScreen from '../screens/TabScreens/HomeScreen';
 import PostScreen from '../screens/TabScreens/PostScreen';
@@ -16,14 +17,18 @@ export default function MyTabs() {
     initialRouteName="Home"
     activeColor="black"
     inactiveColor="gray"
-    barStyle={{ backgroundColor: '#f5f5dc' }}
+    barStyle={ (Platform.OS == 'ios') 
+    ? 
+    { backgroundColor: 'white', height:52, bottom:10 }
+    :
+    { backgroundColor: 'white', height:50}}
 
     >
       <Tab.Screen name="Home" component={HomeScreen} 
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialCommunityIcons name="home" color={color} size={22} />
           ),
         }}
       />
@@ -32,7 +37,7 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="search" color={color} size={26} />
+            <MaterialIcons name="search" color={color} size={22} />
           ),
         }}
       />
@@ -41,7 +46,7 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Post',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="plus" color={color} size={26} />
+            <MaterialCommunityIcons name="plus" color={color} size={22} />
           ),
         }}
       />
@@ -49,7 +54,7 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Notifications',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="heart-outline" color={color} size={26} />
+            <MaterialCommunityIcons name="heart-outline" color={color} size={22} />
           ),
         }}
       />
@@ -58,7 +63,7 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="account" color={color} size={22} />
           ),
         }}
       />
