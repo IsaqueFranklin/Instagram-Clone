@@ -30,7 +30,8 @@ class HomeScreen extends React.Component {
             keyExtractor={(item) => JSON.stringify(item.uid)}
             renderItem={({item}) => (
               <PostComponent 
-              item={item} />
+              item={item} 
+              user={this.props.user} />
             )}
             />
       </View>

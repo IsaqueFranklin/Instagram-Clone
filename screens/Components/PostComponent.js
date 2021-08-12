@@ -16,7 +16,7 @@ export default class PostComponent extends React.Component {
 
   render(){
     return (
-        <View style={{marginBottom:40}}>
+        <View style={{marginBottom:10}}>
             <View style={{width:screenWidth, height:60, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomColor: 'grey', borderBottomWidth: 0.07}}>
                 <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row',}}>
                     <Image source={{uri: this.props.item.photo}} style={{width:40, height:40, borderRadius:20, margin:15}} />
@@ -39,11 +39,29 @@ export default class PostComponent extends React.Component {
         {/*this is our bottom bar*/}
           <View style={{width:screenWidth, height:50, flexDirection: 'row', justifyContent:'space-between', alignItems: 'center'}}>
               <View style={{justifyContent: 'center', flexDirection: 'row', alignItems: 'center'}}>
-                    <Image source={require('../../assets/images/heart.png')} style={{width: 20, height:20, margin:10}} />
-                    <Image source={require('../../assets/images/comment.png')} style={{width: 20, height:20, margin:10}} />
-                    <Image source={require('../../assets/images/share.png')} style={{width: 20, height:20, margin:10}} />
+                    <Image source={require('../../assets/images/heart.png')} style={{width: 25, height:25, margin:10}} />
+                    <Image source={require('../../assets/images/comment.png')} style={{width: 25, height:25, margin:10}} />
+                    <Image source={require('../../assets/images/share.png')} style={{width: 25, height:25, margin:10}} />
               </View>
-              <Text>Share</Text>
+              <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
+          </View>
+          <Text style={{fontWeight: 'bold', marginHorizontal:10, marginTop:5}}>{this.props.item.likes.length} likes</Text>
+          
+          <View style={{flexDirection: 'row', marginTop:5}}>
+                <Text style={{fontWeight: 'bold', marginLeft:10}}>{this.props.item.username} </Text>
+                <Text>{this.props.item.description}</Text>
+          </View>
+          <TouchableOpacity>
+                <Text style={{marginHorizontal:10, color:'grey', marginTop:5}}>Show all the comments: {this.props.item.comments.length}</Text>
+          </TouchableOpacity>
+
+          <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Image source={{uri: this.props.item.photo}} style={{width:40, height:40, borderRadius:20, marginHorizontal:10, marginTop:5}} />
+                <Text style={{color:'grey', marginTop:5}}>Add a comment...</Text>
+            </View>
+            <Image source={require('../../assets/images/flame.png')} style={{width:25, height:25, margin: 15}} />
+            <Text style={{color:'grey', marginTop:5}}>{moment(this.props.item.date).format('ll')}.</Text>
           </View>
         </View>
     );
