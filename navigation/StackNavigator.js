@@ -20,7 +20,7 @@ class MyStack extends React.Component {
     this.props.navigation.navigate('TabNavigator')
     //alert('posted')
     this.props.uploadPost()
-    //this.props.getPosts()
+    this.props.getPosts()
   }
 
   render() {

@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
+import * as firebase from 'firebase'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Button, Dimensions } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -12,6 +13,9 @@ class ProfileScreen extends React.Component {
     return (
       <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
             <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>Profile</Text>
+            <TouchableOpacity onPress={()=> firebase.auth().signOut()}>
+              <Text>Logout</Text>
+            </TouchableOpacity>
       </View>
     );
   }

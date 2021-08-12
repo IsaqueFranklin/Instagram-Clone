@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { getUser } from '../../actions/user'
 import { getPosts } from '../../actions/post'
 
+import PostComponent from '../Components/PostComponent'
+
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
@@ -20,15 +22,15 @@ class HomeScreen extends React.Component {
 
   render(){
     return (
-      <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
-            <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>Home</Text>
+      <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',}}>
+            <Text style={{fontSize:30, fontFamily: 'logo-font', bottom: 0, marginTop: 70, color: '#007aff', justifyContent: 'left'}}>Home</Text>
             <FlatList 
+            style={{marginTop:50,}}
             data={this.props.post.feed}
             keyExtractor={(item) => JSON.stringify(item.uid)}
             renderItem={({item}) => (
-              <View>
-                  <Image source={{uri:item.photos[0]}} style={{width:screenWidth, height:360,}} />
-              </View>
+              <PostComponent 
+              item={item} />
             )}
             />
       </View>
