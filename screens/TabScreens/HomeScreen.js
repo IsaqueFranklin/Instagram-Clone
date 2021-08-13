@@ -4,7 +4,7 @@ import { StyleSheet, Text, FlatList, TextInput, TouchableOpacity, SafeAreaView, 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { getUser } from '../../actions/user'
-import { getPosts } from '../../actions/post'
+import { getPosts, likePost, unLikePost } from '../../actions/post'
 
 import PostComponent from '../Components/PostComponent'
 
@@ -37,7 +37,9 @@ class HomeScreen extends React.Component {
             renderItem={({item}) => (
               <PostComponent 
               item={item} 
-              user={this.props.user} />
+              user={this.props.user} 
+              likePost={(item)=>this.props.likePost(item)}
+              unLikePost={(item)=>this.props.unLikePost(item)} />
             )}
             />
       </SafeAreaView>
@@ -47,7 +49,7 @@ class HomeScreen extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getUser, getPosts }, dispatch)
+    return bindActionCreators({ getUser, getPosts, likePost, unLikePost }, dispatch)
 }
 
 const mapStateToProps = (state) => {

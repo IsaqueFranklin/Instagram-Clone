@@ -82,3 +82,31 @@ export const getPosts = (numberOfPosts) => {
         dispatch({type: 'GET_POSTS', payload:array})
     }
 }
+
+export const likePost = (post) => {
+    return async (dispatch, getState) => {
+        try {
+            const { uid, username, photo } = getState().user
+
+            db.collection('posts').doc(post.id).update({
+                likes: firebase.firestore.FieldValue.arrayUnion(uid)
+            })
+        } catch(e){
+            alert(e)
+        }
+    }
+}
+
+export const unLikePost = (post) => {
+    return async (dispatch, getState) => {
+        try {
+            const { uid, username, photo } = getState().user
+
+            db.collection('posts').doc(post.id).update({
+                likes: firebase.firestore.FieldValue.arrayRemove(uid)
+            })
+        } catch(e){
+            alert(e)
+        }
+    }
+}

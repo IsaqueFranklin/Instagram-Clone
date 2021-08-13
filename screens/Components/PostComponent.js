@@ -13,6 +13,29 @@ export default class PostComponent extends React.Component {
         prop: PropTypes
     }
 
+    state = {
+        liked: undefined,
+        numLike: 0
+    }
+
+    likePost = () => {
+        if((this.props.item.likes.includes(this.props.user.uid)) || this.state.liked == true){
+            if(this.state.liked == false){
+                this.setState({liked: true})
+                this.setState({numLike:this.state.numLike+1})
+                this.props.likePost(this.props.item)
+            } else {
+                this.setState({liked: false})
+                this.setState({numLike:this.state.numLike-1})
+                this.props.unLikePost(this.props.item)
+            }
+        } else {
+            this.setState({liked: true})
+            this.props.likePost(this.props.item)
+            this.setState({numLike: this.state.numLike+1})
+        }
+    }
+
 
   render(){
     return (
@@ -39,13 +62,26 @@ export default class PostComponent extends React.Component {
         {/*this is our bottom bar*/}
           <View style={{width:screenWidth, height:50, flexDirection: 'row', justifyContent:'space-between', alignItems: 'center'}}>
               <View style={{justifyContent: 'center', flexDirection: 'row', alignItems: 'center'}}>
-                    <Image source={require('../../assets/images/heart.png')} style={{width: 25, height:25, margin:10}} />
+                    <TouchableOpacity
+                    onPress={() => this.likePost()}>
+                        {
+                            (this.props.item.likes.includes(this.props.user.uid) && this.state.liked == undefined)
+                            ?
+                            <Image source={require('../../assets/images/red.png')} style={{width: 25, height:25, margin:10}} />
+                            :
+                                (this.state.liked == true) 
+                                ?
+                                <Image source={require('../../assets/images/red.png')} style={{width: 25, height:25, margin:10}} />
+                                :
+                                <Image source={require('../../assets/images/heart.png')} style={{width: 25, height:25, margin:10}} />
+                        }
+                    </TouchableOpacity>
                     <Image source={require('../../assets/images/comment.png')} style={{width: 25, height:25, margin:10}} />
                     <Image source={require('../../assets/images/share.png')} style={{width: 25, height:25, margin:10}} />
               </View>
               <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
           </View>
-          <Text style={{fontWeight: 'bold', marginHorizontal:10, marginTop:5}}>{this.props.item.likes.length} likes</Text>
+          <Text style={{fontWeight: 'bold', marginHorizontal:10, marginTop:5}}>{this.props.item.likes.length + this.state.numLike} likes</Text>
           
           <View style={{flexDirection: 'row', marginTop:5}}>
                 <Text style={{fontWeight: 'bold', marginLeft:10}}>{this.props.item.username} </Text>
