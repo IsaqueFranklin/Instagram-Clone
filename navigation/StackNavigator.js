@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 import PostCheckout from '../screens/TabScreens/upload/PostCheckout'
-import { uploadPost } from '../actions/post'
+import { uploadPost, getPosts } from '../actions/post'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -45,7 +45,7 @@ class MyStack extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getUser, uploadPost }, dispatch)
+  return bindActionCreators({ getUser, uploadPost, getPosts }, dispatch)
 }
 
 const mapStateToProps = (state) => {

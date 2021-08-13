@@ -25,7 +25,7 @@ export default class PostComponent extends React.Component {
                 <Text style={{margin:15}}>{moment(this.props.item.date).format('ll')}</Text>
             </View>
             <View>
-                <ScrollView 
+            <ScrollView 
                 horizontal={true}
                 pagingEnabled={true}>
                 {

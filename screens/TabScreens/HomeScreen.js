@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, FlatList, TextInput, TouchableOpacity, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, FlatList, TextInput, TouchableOpacity, SafeAreaView, View, Image, Dimensions } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -22,10 +22,16 @@ class HomeScreen extends React.Component {
 
   render(){
     return (
-      <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',}}>
-            <Text style={{fontSize:30, fontFamily: 'logo-font', bottom: 0, marginTop: 70, color: '#007aff', justifyContent: 'left'}}>Home</Text>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',}}>
+            <View style={{height:50, width: screenWidth, borderBottomColor: 'rgba(0,0,0,0.1)', borderBottomWidth:0.5, justifyContent: 'space-between', flexDirection: 'row', marginTop:60}}>
+              <Text style={{fontSize:25, fontFamily: 'logo-font', color: '#007aff', marginLeft: 30}}>NotInstagram</Text>
+              <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+                  <Image source={require('../../assets/images/heart.png')} style={{width: 25, height:25, margin:10, bottom:4}} />
+                  <Image source={require('../../assets/images/share.png')} style={{width: 25, height:25, margin:10, bottom:5}} />
+              </View>
+            </View>
             <FlatList 
-            style={{marginTop:50,}}
+            style={{marginTop:0,}}
             data={this.props.post.feed}
             keyExtractor={(item) => JSON.stringify(item.uid)}
             renderItem={({item}) => (
@@ -34,7 +40,7 @@ class HomeScreen extends React.Component {
               user={this.props.user} />
             )}
             />
-      </View>
+      </SafeAreaView>
     );
   }
 }
