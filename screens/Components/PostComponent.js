@@ -15,7 +15,8 @@ export default class PostComponent extends React.Component {
 
     state = {
         liked: undefined,
-        numLike: 0
+        numLike: 0,
+        saved: undefined,
     }
 
     likePost = () => {
@@ -79,7 +80,18 @@ export default class PostComponent extends React.Component {
                     <Image source={require('../../assets/images/comment.png')} style={{width: 25, height:25, margin:10}} />
                     <Image source={require('../../assets/images/share.png')} style={{width: 25, height:25, margin:10}} />
               </View>
-              <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
+              <TouchableOpacity onPress={() => {}}>
+                {
+                    (this.props.item.savedBy.includes(this.props.user.uid) && this.state.saved == undefined)
+                    ?
+                    <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
+                    :
+                    (this.state.saved == true) ?
+                    <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
+                    :
+                    <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
+                }
+              </TouchableOpacity>
           </View>
           <Text style={{fontWeight: 'bold', marginHorizontal:10, marginTop:5}}>{this.props.item.likes.length + this.state.numLike} likes</Text>
           

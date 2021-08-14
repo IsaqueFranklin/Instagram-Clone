@@ -56,6 +56,7 @@ export const uploadPost = () => {
                 photos: post.photos,
                 username: user.username,
                 date: new Date().getTime(),
+                savedBy: [],
                 likes:[],
                 comments:[],
                 description: post.description
