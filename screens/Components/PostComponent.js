@@ -37,6 +37,21 @@ export default class PostComponent extends React.Component {
         }
     }
 
+    savePost = () => {
+        if((this.props.item.savedBy.includes(this.props.user.uid)) || this.state.saved == true){
+            if(this.state.liked == false){
+                this.setState({saved: true})
+                //this.props.likePost(this.props.item)
+            } else {
+                this.setState({saved: false})
+                //this.props.unLikePost(this.props.item)
+            }
+        } else {
+            this.setState({saved: true})
+            //this.props.likePost(this.props.item)
+        }
+    }
+
 
   render(){
     return (
@@ -80,14 +95,14 @@ export default class PostComponent extends React.Component {
                     <Image source={require('../../assets/images/comment.png')} style={{width: 25, height:25, margin:10}} />
                     <Image source={require('../../assets/images/share.png')} style={{width: 25, height:25, margin:10}} />
               </View>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => this.savePost()}>
                 {
                     (this.props.item.savedBy.includes(this.props.user.uid) && this.state.saved == undefined)
                     ?
-                    <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
+                    <Image source={require('../../assets/images/saved.png')} style={{width: 25, height:25, margin:10}} />
                     :
                     (this.state.saved == true) ?
-                    <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
+                    <Image source={require('../../assets/images/saved.png')} style={{width: 25, height:25, margin:10}} />
                     :
                     <Image source={require('../../assets/images/save.png')} style={{width: 25, height:25, margin:10}} />
                 }
