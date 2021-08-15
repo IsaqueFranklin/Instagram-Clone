@@ -5,6 +5,7 @@ import { FontAwesome } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 import PostCheckout from '../screens/TabScreens/upload/PostCheckout'
+import SavedPosts from '../screens/TabScreens/HeaderScreens/SavedPosts';
 import { uploadPost, getPosts } from '../actions/post'
 
 import { bindActionCreators } from 'redux';
@@ -27,6 +28,7 @@ class MyStack extends React.Component {
     return (
       <Stack.Navigator>
         <Stack.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}} />
+        <Stack.Screen name="SavedPosts" component={SavedPosts} />
         <Stack.Screen name="PostCheckout" component={PostCheckout} 
         options={{
           headerShown: true, 
