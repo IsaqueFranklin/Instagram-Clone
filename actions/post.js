@@ -84,6 +84,25 @@ export const getPosts = (numberOfPosts) => {
     }
 }
 
+export const getSavedPosts = () => {
+    return async (dispatch, getState) => {
+
+        try {
+            const { uid } = getState().user
+            const posts = await db.collection('posts').orderBy('date', 'desc').where('savedBy', 'array-contains', uid).get()
+
+            let array = []
+            posts.forEach(post => {
+                array.push(post.data())
+            })
+
+            dispatch({type: 'GET_SAVED_POSTS', payload:array})
+        } catch(e){
+            console.log(e)
+        }
+    }
+}
+
 export const likePost = (post) => {
     return async (dispatch, getState) => {
         try {

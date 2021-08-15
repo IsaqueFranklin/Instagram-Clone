@@ -4,7 +4,7 @@ import { StyleSheet, Text, FlatList, TextInput, TouchableOpacity, SafeAreaView, 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { getUser } from '../../../actions/user'
-import { getPosts, likePost, unLikePost, savePost, unSavePost } from '../../../actions/post'
+import { getSavedPosts, likePost, unLikePost, savePost, unSavePost } from '../../../actions/post'
 
 import PostComponent from '../../Components/PostComponent'
 
@@ -16,16 +16,15 @@ class SavedPosts extends React.Component {
   
 
   componentDidMount = () => {
-    this.props.getPosts(10)
+    this.props.getSavedPosts()
   }
 
 
   render(){
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',}}>
             <FlatList 
-            style={{marginTop:0,}}
-            data={this.props.post.feed}
+            style={{backgroundColor: 'white'}}
+            data={this.props.post.saved_feed}
             keyExtractor={(item) => JSON.stringify(item.uid)}
             renderItem={({item}) => (
               <PostComponent 
@@ -37,14 +36,13 @@ class SavedPosts extends React.Component {
               unSavePost={(item)=>this.props.unSavePost(item)} />
             )}
             />
-      </SafeAreaView>
     );
   }
 }
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getUser, getPosts, likePost, unLikePost, savePost, unSavePost }, dispatch)
+    return bindActionCreators({ getUser, getSavedPosts, likePost, unLikePost, savePost, unSavePost }, dispatch)
 }
 
 const mapStateToProps = (state) => {
