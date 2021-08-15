@@ -41,14 +41,14 @@ export default class PostComponent extends React.Component {
         if((this.props.item.savedBy.includes(this.props.user.uid)) || this.state.saved == true){
             if(this.state.liked == false){
                 this.setState({saved: true})
-                //this.props.likePost(this.props.item)
+                this.props.savePost(this.props.item)
             } else {
                 this.setState({saved: false})
-                //this.props.unLikePost(this.props.item)
+                this.props.unSavePost(this.props.item)
             }
         } else {
             this.setState({saved: true})
-            //this.props.likePost(this.props.item)
+            this.props.savePost(this.props.item)
         }
     }
 

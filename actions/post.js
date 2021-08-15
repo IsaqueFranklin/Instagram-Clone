@@ -111,3 +111,39 @@ export const unLikePost = (post) => {
         }
     }
 }
+
+export const savePost = (post) => {
+    return async (dispatch, getState) => {
+        try {
+            const { uid } = getState().user
+
+            db.collection('posts').doc(post.id).update({
+                savedBy: firebase.firestore.FieldValue.arrayUnion(uid)
+            })
+            db.collection('users').doc(uid).update({
+                savedPosts: firebase.firestore.FieldValue.arrayUnion(post.id)
+            })
+
+        } catch(e){
+            alert(e)
+        }
+    }
+}
+
+export const unSavePost = (post) => {
+    return async (dispatch, getState) => {
+        try {
+            const { uid } = getState().user
+
+            db.collection('posts').doc(post.id).update({
+                savedBy: firebase.firestore.FieldValue.arrayRemove(uid)
+            })
+            db.collection('users').doc(uid).update({
+                savedPosts: firebase.firestore.FieldValue.arrayRemove(post.id)
+            })
+
+        } catch(e){
+            alert(e)
+        }
+    }
+}
