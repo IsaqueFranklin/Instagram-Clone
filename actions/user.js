@@ -35,7 +35,9 @@ export const signup = () => {
                     bio: '',
                     likes: 0,
                     photo: photo,
-                    savedPosts: []
+                    savedPosts: [],
+                    followers: [],
+                    following: []
                 }
 
                 await db.collection('users').doc(response.user.uid).set(user)

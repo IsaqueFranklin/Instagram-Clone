@@ -29,7 +29,11 @@ class MyStack extends React.Component {
       <Stack.Navigator>
         <Stack.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}} />
         <Stack.Screen name="SavedPosts" component={SavedPosts} />
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} options={{
+          headerStyle: {
+            backgroundColor: 'white', borderWidth: 0
+          }
+        }} />
         <Stack.Screen name="PostCheckout" component={PostCheckout} 
         options={{
           headerShown: true, 
