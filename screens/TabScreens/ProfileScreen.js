@@ -46,25 +46,25 @@ class ProfileScreen extends React.Component {
             <View style={{width: '100%', height:120, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Image source={{uri: this.props.profile.photo}}  style={{width: 90, height:90, borderRadius:45, margin:20}} />
                 <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
-                  <View style={{justifyContent: 'center', alignItems: 'center', margin:10}}>
+                  <View style={{justifyContent: 'center', alignItems: 'center', margin:8}}>
                       <Text style={{fontSize:20, fontWeight: 'bold'}}>
-                        {this.props.profile.posts.length}
+                        {this.props.profile.posts?.length}
                       </Text>
                       <Text style={{fontSize:15,}}>
                         Posts
                       </Text>
                   </View >
-                  <View style={{justifyContent: 'center', alignItems: 'center', margin:10}}>
+                  <View style={{justifyContent: 'center', alignItems: 'center', margin:8}}>
                       <Text style={{fontSize:20, fontWeight: 'bold'}}>
-                        1
+                      {this.props.profile.followers?.length}
                       </Text>
                       <Text style={{fontSize:15,}}>
                         Followers
                       </Text>
                   </View>
-                  <View style={{justifyContent: 'center', alignItems: 'center', margin:10}}>
+                  <View style={{justifyContent: 'center', alignItems: 'center', margin:8}}>
                       <Text style={{fontSize:20, fontWeight: 'bold'}}>
-                        12
+                      {this.props.profile.following?.length}
                       </Text>
                       <Text style={{fontSize:15,}}>
                         Following
@@ -73,21 +73,35 @@ class ProfileScreen extends React.Component {
                 </View>
             </View> 
 
-            <View style={{padding:20, width: '100%',}}>
+            <View style={{paddingHorizontal:20, width: '100%', marginBottom:20}}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 10}}>
+                {this.props.profile.username}
+              </Text>
               <Text>
                 {this.props.profile.bio}
               </Text>
             </View>
 
-            <View style={{height:60, width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
-              <TouchableOpacity style={{flexDirection: 'row', width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
-                  <Text style={{fontWeight: 'bold', fontSize:18}}>Following</Text>
-              </TouchableOpacity>
+            {
+              (this.props.profile.followers?.includes(this.props.user.uid))?
+                <View style={{height:60, width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+                  <TouchableOpacity style={{flexDirection: 'row', width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
+                      <Text style={{fontWeight: 'bold', fontSize:18, margin:5}}>Following</Text>
+                      <Image source={require('../../assets/images/check.png')} style={{width:20, height:18}} />
+                  </TouchableOpacity>
 
-              <TouchableOpacity style={{width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
-              <Text style={{fontWeight: 'bold', fontSize:18}}>Message</Text>
-              </TouchableOpacity>
-            </View>
+                  <TouchableOpacity style={{width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
+                  <Text style={{fontWeight: 'bold', fontSize:18}}>Message</Text>
+                  </TouchableOpacity>
+                </View>
+              :
+                <View style={{height:60, width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+                  <TouchableOpacity style={{width: '90%', height: 35, backgroundColor: '#007aff', justifyContent: 'center', alignItems: 'center', borderRadius:8}}>
+                      <Text style={{fontWeight: 'bold', fontSize:18, margin:5, color: 'white'}}>Follow</Text>
+                  </TouchableOpacity>
+                </View>
+
+            }
         </View>
       );
     }
