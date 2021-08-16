@@ -8,16 +8,36 @@ import { getUser } from '../../actions/user'
 
 
 class ProfileScreen extends React.Component {
+
+  componentDidMount = () => {
+    const { params } = this.props.route
+    if (params !== undefined) {
+      this.props.getUser()
+    }
+  }
   
   render(){
-    return (
-      <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
-            <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>Profile</Text>
-            <TouchableOpacity onPress={()=> firebase.auth().signOut()}>
-              <Text>Logout</Text>
-            </TouchableOpacity>
-      </View>
-    );
+    const { params } = this.props.route
+    if(params == undefined){
+      return (
+        <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
+              <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>Your Profile</Text>
+              <TouchableOpacity onPress={()=> firebase.auth().signOut()}>
+                <Text>Logout</Text>
+              </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
+              <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>{params}</Text>
+              <TouchableOpacity onPress={()=> firebase.auth().signOut()}>
+                <Text>Logout</Text>
+              </TouchableOpacity>
+        </View>
+      );
+    }
+    
   }
 }
 

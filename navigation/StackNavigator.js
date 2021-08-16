@@ -7,7 +7,7 @@ import TabNavigator from './TabNavigator';
 import PostCheckout from '../screens/TabScreens/upload/PostCheckout'
 import SavedPosts from '../screens/TabScreens/HeaderScreens/SavedPosts';
 import { uploadPost, getPosts } from '../actions/post'
-
+import ProfileScreen from '../screens/TabScreens/ProfileScreen'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { getUser } from '../actions/user'
@@ -29,6 +29,7 @@ class MyStack extends React.Component {
       <Stack.Navigator>
         <Stack.Screen name="TabNavigator" component={TabNavigator} options={{headerShown: false}} />
         <Stack.Screen name="SavedPosts" component={SavedPosts} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="PostCheckout" component={PostCheckout} 
         options={{
           headerShown: true, 

@@ -43,7 +43,8 @@ class HomeScreen extends React.Component {
               likePost={(item)=>this.props.likePost(item)}
               unLikePost={(item)=>this.props.unLikePost(item)} 
               savePost={(item)=>this.props.savePost(item)}
-              unSavePost={(item)=>this.props.unSavePost(item)} />
+              unSavePost={(item)=>this.props.unSavePost(item)} 
+              navigation={this.props.navigation} />
             )}
             />
       </SafeAreaView>

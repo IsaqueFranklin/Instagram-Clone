@@ -57,10 +57,12 @@ export default class PostComponent extends React.Component {
     return (
         <View style={{marginBottom:10}}>
             <View style={{width:screenWidth, height:60, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomColor: 'grey', borderBottomWidth: 0.07}}>
-                <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row',}}>
+                <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('ProfileScreen', this.props.item.uid)} 
+                style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row',}}>
                     <Image source={{uri: this.props.item.photo}} style={{width:40, height:40, borderRadius:20, margin:15}} />
                     <Text style={{fontWeight: '400', fontSize:16}}>{this.props.item.username}</Text>
-                </View>
+                </TouchableOpacity>
                 <Text style={{margin:15}}>{moment(this.props.item.date).format('ll')}</Text>
             </View>
             <View>
