@@ -7,6 +7,10 @@ import { connect } from 'react-redux'
 import { getUser } from '../../actions/user'
 
 
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
+
+
 class ProfileScreen extends React.Component {
 
   componentDidMount = () => {
@@ -23,7 +27,7 @@ class ProfileScreen extends React.Component {
       title: this.props.profile.username
     })
 
-    
+
     if(params == undefined){
       return (
         <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
@@ -68,6 +72,22 @@ class ProfileScreen extends React.Component {
                   </View>
                 </View>
             </View> 
+
+            <View style={{padding:20, width: '100%',}}>
+              <Text>
+                {this.props.profile.bio}
+              </Text>
+            </View>
+
+            <View style={{height:60, width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
+              <TouchableOpacity style={{flexDirection: 'row', width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
+                  <Text style={{fontWeight: 'bold', fontSize:18}}>Following</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
+              <Text style={{fontWeight: 'bold', fontSize:18}}>Message</Text>
+              </TouchableOpacity>
+            </View>
         </View>
       );
     }
