@@ -12,7 +12,7 @@ class ProfileScreen extends React.Component {
   componentDidMount = () => {
     const { params } = this.props.route
     if (params !== undefined) {
-      this.props.getUser()
+      this.props.getUser(params, 'GET_PROFILE')
     }
   }
   
@@ -27,10 +27,13 @@ class ProfileScreen extends React.Component {
               </TouchableOpacity>
         </View>
       );
-    } else {
+    } 
+    
+    
+    else {
       return (
         <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
-              <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>{params}</Text>
+              <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>{this.props.profile.username}</Text>
               <TouchableOpacity onPress={()=> firebase.auth().signOut()}>
                 <Text>Logout</Text>
               </TouchableOpacity>
@@ -49,6 +52,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return{
         user: state.user,
+        profile: state.profile,
     }
 }
 

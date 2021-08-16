@@ -1,5 +1,14 @@
 import { combineReducers } from "redux";
 
+const profile = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_PROFILE':
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const user = (state = {}, action) => {
     switch (action.type) {
         case 'LOGIN':
@@ -34,7 +43,8 @@ const post = (state = {}, action) => {
 
 const rootReducer = combineReducers({
     user,
-    post
+    post,
+    profile,
 })
 
 export default rootReducer;

@@ -61,7 +61,7 @@ export const login = () => {
     }
 }
 
-export const getUser = (uid) => {
+export const getUser = (uid, type) => {
     return async (dispatch) => {
         const userQuery = await db.collection('users').doc(uid).get()
         let user = userQuery.data()
@@ -74,6 +74,10 @@ export const getUser = (uid) => {
         })
         user.posts = orderBy(posts, 'data', 'desc')
 
-        dispatch({type: 'LOGIN', payload: user})
+        if(type == 'GET_PROFILE'){
+            dispatch({ type: 'GET_PROFILE', payload: user})
+        } else {
+            dispatch({type: 'LOGIN', payload: user})
+        }
     }
 }
