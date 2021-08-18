@@ -27,6 +27,10 @@ class ProfileScreen extends React.Component {
   unFollow = () => {
     this.props.unFollowUser(this.props.profile.uid);
   }
+
+  goToPost = (post) => {
+    this.props.goToPost(post)
+  }
   
   render(){
     const { params } = this.props.route
@@ -121,7 +125,10 @@ class ProfileScreen extends React.Component {
             keyExtractor={(item) => JSON.stringify(item.date) }
             style={{flex: 1}}
             renderItem={({item}) => 
-                <Image source={{uri: item.photos[0]}} style={{width:screenWidth/3, height:screenWidth/3}} />
+                <TouchableOpacity
+                onPress={() => this.goToPost(item)}>
+                    <Image source={{uri: item.photos[0]}} style={{width:screenWidth/3, height:screenWidth/3}} />
+                </TouchableOpacity>
             }
             />
         </ScrollView>
