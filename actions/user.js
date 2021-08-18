@@ -56,7 +56,7 @@ export const login = () => {
             const { email, password } = getState().user
             const response = await firebase.auth().signInWithEmailAndPassword(email, password)
 
-            dispatch(getUser(response.user.uid, 'LOGIN'))
+            dispatch(getUser(response.user.uid))
         } catch(e){
             alert(e)
         }
@@ -74,7 +74,8 @@ export const getUser = (uid, type) => {
         postQuery.forEach(function(response){
             posts.push(response.data())
         })
-        user.posts = orderBy(posts, 'data', 'desc')
+
+        user.posts = orderBy(posts, 'date', 'desc')
 
         if(type == 'GET_PROFILE'){
             dispatch({ type: 'GET_PROFILE', payload: user})

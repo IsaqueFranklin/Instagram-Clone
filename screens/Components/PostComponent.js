@@ -10,12 +10,6 @@ const screenHeight = Dimensions.get('window').height
 
 export default class PostComponent extends React.Component {
 
-    componentDidMount = () => {
-        if (params !== undefined) {
-          this.props.getUser(params, 'GET_PROFILE')
-        }
-    }
-
 
     static propTypes = {
         prop: PropTypes
@@ -130,7 +124,7 @@ export default class PostComponent extends React.Component {
 
           <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image source={{uri: this.props.profile.photo}} style={{width:40, height:40, borderRadius:20, marginHorizontal:10, marginTop:5}} />
+                <Image source={{uri: this.props.item.photo}} style={{width:40, height:40, borderRadius:20, marginHorizontal:10, marginTop:5}} />
                 <Text style={{color:'grey', marginTop:5}}>Add a comment...</Text>
             </View>
             <Image source={require('../../assets/images/flame.png')} style={{width:25, height:25, margin: 15}} />

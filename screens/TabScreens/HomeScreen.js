@@ -13,11 +13,13 @@ const screenHeight = Dimensions.get('window').height
 
 
 class HomeScreen extends React.Component {
-  
 
   componentDidMount = () => {
-    this.props.getPosts(10)
-  }
+    this.props.getPosts(10);
+    if (this.props.user.uid !== undefined) {
+      this.props.getUser(this.props.user.uid, 'GET_PROFILE')
+    }
+}
 
 
   render(){
@@ -44,7 +46,8 @@ class HomeScreen extends React.Component {
               unLikePost={(item)=>this.props.unLikePost(item)} 
               savePost={(item)=>this.props.savePost(item)}
               unSavePost={(item)=>this.props.unSavePost(item)} 
-              navigation={this.props.navigation} />
+              navigation={this.props.navigation} 
+              profile={this.props.profile} />
             )}
             />
       </SafeAreaView>

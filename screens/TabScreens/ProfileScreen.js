@@ -1,6 +1,6 @@
 import React from 'react';
 import * as firebase from 'firebase'
-import { StyleSheet, Text, Image, TextInput, TouchableOpacity, View, Button, Dimensions } from 'react-native';
+import { StyleSheet, Text, Image, FlatList, ScrollView, TextInput, TouchableOpacity, View, Button, Dimensions } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -50,7 +50,7 @@ class ProfileScreen extends React.Component {
     
     else {
       return (
-        <View style={{flex: 1, backgroundColor: 'white', backgroundColor: 'white'}}>
+        <ScrollView style={{flex: 1, backgroundColor: 'white', backgroundColor: 'white'}}>
             <View style={{width: '100%', height:120, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Image source={{uri: this.props.profile.photo}}  style={{width: 90, height:90, borderRadius:45, margin:20}} />
                 <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
@@ -114,7 +114,17 @@ class ProfileScreen extends React.Component {
                 </View>
 
             }
-        </View>
+
+            <FlatList
+            numColumns={3}
+            data={this.props.profile.posts}
+            keyExtractor={(item) => JSON.stringify(item.date) }
+            style={{flex: 1}}
+            renderItem={({item}) => 
+                <Image source={{uri: item.photos[0]}} style={{width:screenWidth/3, height:screenWidth/3}} />
+            }
+            />
+        </ScrollView>
       );
     }
     
