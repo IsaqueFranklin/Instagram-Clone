@@ -25,7 +25,7 @@ class ProfileScreen extends React.Component {
   }
 
   unFollow = () => {
-    this.props.unFollowUser(this.props.profile.uid)
+    this.props.unFollowUser(this.props.profile.uid);
   }
   
   render(){

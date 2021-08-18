@@ -56,7 +56,7 @@ export const login = () => {
             const { email, password } = getState().user
             const response = await firebase.auth().signInWithEmailAndPassword(email, password)
 
-            dispatch(getUser(response.user.uid))
+            dispatch(getUser(response.user.uid, 'LOGIN'))
         } catch(e){
             alert(e)
         }
@@ -89,7 +89,7 @@ export const followUser = (userToFollow) => {
         try {
             const { uid } = getState().user
         
-            await db.collection('user').doc(uid).update({
+            await db.collection('users').doc(uid).update({
                 following: firebase.firestore.FieldValue.arrayUnion(userToFollow)
             })
 
@@ -97,7 +97,7 @@ export const followUser = (userToFollow) => {
                 followers: firebase.firestore.FieldValue.arrayUnion(uid)
             })
 
-            dispatch(getUser(userToFollow))
+            dispatch(getUser(userToFollow, 'GET_PROFILE'))
 
         } catch(e) {
             alert(e)
@@ -110,7 +110,7 @@ export const unFollowUser = (userToFollow) => {
         try {
             const { uid } = getState().user
         
-            await db.collection('user').doc(uid).update({
+            await db.collection('users').doc(uid).update({
                 following: firebase.firestore.FieldValue.arrayRemove(userToFollow)
             })
 
@@ -118,7 +118,7 @@ export const unFollowUser = (userToFollow) => {
                 followers: firebase.firestore.FieldValue.arrayRemove(uid)
             })
 
-            dispatch(getUser(userToFollow))
+            dispatch(getUser(userToFollow, 'GET_PROFILE'))
 
         } catch(e) {
             alert(e)
