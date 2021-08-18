@@ -5,7 +5,7 @@ import { StyleSheet, Text, Image, FlatList, ScrollView, TextInput, TouchableOpac
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { getUser, followUser, unFollowUser } from '../../actions/user'
-
+import { getPost } from '../../actions/post'
 
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
@@ -29,7 +29,8 @@ class ProfileScreen extends React.Component {
   }
 
   goToPost = (post) => {
-    this.props.goToPost(post)
+    this.props.getPost(post)
+    this.props.navigation.navigate('OnePost')
   }
   
   render(){
@@ -56,11 +57,11 @@ class ProfileScreen extends React.Component {
       return (
         <ScrollView style={{flex: 1, backgroundColor: 'white', backgroundColor: 'white'}}>
             <View style={{width: '100%', height:120, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                <Image source={{uri: this.props.profile.photo}}  style={{width: 90, height:90, borderRadius:45, margin:20}} />
+                <Image source={{uri: this.props.profile?.photo}}  style={{width: 90, height:90, borderRadius:45, margin:20}} />
                 <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
                   <View style={{justifyContent: 'center', alignItems: 'center', margin:8}}>
                       <Text style={{fontSize:20, fontWeight: 'bold'}}>
-                        {this.props.profile.posts?.length}
+                        {this.props.profile?.posts?.length}
                       </Text>
                       <Text style={{fontSize:15,}}>
                         Posts
@@ -68,7 +69,7 @@ class ProfileScreen extends React.Component {
                   </View >
                   <View style={{justifyContent: 'center', alignItems: 'center', margin:8}}>
                       <Text style={{fontSize:20, fontWeight: 'bold'}}>
-                      {this.props.profile.followers?.length}
+                      {this.props.profile?.followers?.length}
                       </Text>
                       <Text style={{fontSize:15,}}>
                         Followers
@@ -76,7 +77,7 @@ class ProfileScreen extends React.Component {
                   </View>
                   <View style={{justifyContent: 'center', alignItems: 'center', margin:8}}>
                       <Text style={{fontSize:20, fontWeight: 'bold'}}>
-                      {this.props.profile.following?.length}
+                      {this.props.profile?.following?.length}
                       </Text>
                       <Text style={{fontSize:15,}}>
                         Following
@@ -87,10 +88,10 @@ class ProfileScreen extends React.Component {
 
             <View style={{paddingHorizontal:20, width: '100%', marginBottom:20}}>
               <Text style={{fontSize: 16, fontWeight: 'bold', marginBottom: 10}}>
-                {this.props.profile.username}
+                {this.props.profile?.username}
               </Text>
               <Text>
-                {this.props.profile.bio}
+                {this.props.profile?.bio}
               </Text>
             </View>
 
@@ -140,7 +141,7 @@ class ProfileScreen extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getUser, followUser, unFollowUser }, dispatch)
+    return bindActionCreators({ getUser, followUser, unFollowUser, getPost }, dispatch)
 }
 
 const mapStateToProps = (state) => {
