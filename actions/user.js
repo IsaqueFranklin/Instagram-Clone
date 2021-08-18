@@ -53,7 +53,7 @@ export const signup = () => {
 export const login = () => {
     return async (dispatch, getState) => {
         try {
-            const { email, password, username, photo } = getState().user
+            const { email, password } = getState().user
             const response = await firebase.auth().signInWithEmailAndPassword(email, password)
 
             dispatch(getUser(response.user.uid))
@@ -80,6 +80,48 @@ export const getUser = (uid, type) => {
             dispatch({ type: 'GET_PROFILE', payload: user})
         } else {
             dispatch({type: 'LOGIN', payload: user})
+        }
+    }
+}
+
+export const followUser = (userToFollow) => {
+    return async (dispatch, getState) => {
+        try {
+            const { uid } = getState().user
+        
+            await db.collection('user').doc(uid).update({
+                following: firebase.firestore.FieldValue.arrayUnion(userToFollow)
+            })
+
+            await db.collection('users').doc(userToFollow).update({
+                followers: firebase.firestore.FieldValue.arrayUnion(uid)
+            })
+
+            dispatch(getUser(userToFollow))
+
+        } catch(e) {
+            alert(e)
+        }
+    }
+}
+
+export const unFollowUser = (userToFollow) => {
+    return async (dispatch, getState) => {
+        try {
+            const { uid } = getState().user
+        
+            await db.collection('user').doc(uid).update({
+                following: firebase.firestore.FieldValue.arrayRemove(userToFollow)
+            })
+
+            await db.collection('users').doc(userToFollow).update({
+                followers: firebase.firestore.FieldValue.arrayRemove(uid)
+            })
+
+            dispatch(getUser(userToFollow))
+
+        } catch(e) {
+            alert(e)
         }
     }
 }

@@ -4,7 +4,7 @@ import { StyleSheet, Text, Image, TextInput, TouchableOpacity, View, Button, Dim
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import { getUser } from '../../actions/user'
+import { getUser, followUser, unFollowUser } from '../../actions/user'
 
 
 const screenWidth = Dimensions.get('window').width
@@ -18,6 +18,14 @@ class ProfileScreen extends React.Component {
     if (params !== undefined) {
       this.props.getUser(params, 'GET_PROFILE')
     }
+  }
+
+  follow = () => {
+    this.props.followUser(this.props.profile.uid)
+  }
+
+  unFollow = () => {
+    this.props.unFollowUser(this.props.profile.uid)
   }
   
   render(){
@@ -85,18 +93,22 @@ class ProfileScreen extends React.Component {
             {
               (this.props.profile.followers?.includes(this.props.user.uid))?
                 <View style={{height:60, width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
-                  <TouchableOpacity style={{flexDirection: 'row', width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
+                  <TouchableOpacity 
+                  onPress={() => this.unFollow()}
+                  style={{flexDirection: 'row', width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
                       <Text style={{fontWeight: 'bold', fontSize:18, margin:5}}>Following</Text>
                       <Image source={require('../../assets/images/check.png')} style={{width:20, height:18}} />
                   </TouchableOpacity>
 
                   <TouchableOpacity style={{width:screenWidth*.45, height:35, justifyContent: 'center',alignItems: 'center', borderWidth:0.5, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
-                  <Text style={{fontWeight: 'bold', fontSize:18}}>Message</Text>
+                      <Text style={{fontWeight: 'bold', fontSize:18}}>Message</Text>
                   </TouchableOpacity>
                 </View>
               :
                 <View style={{height:60, width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
-                  <TouchableOpacity style={{width: '90%', height: 35, backgroundColor: '#007aff', justifyContent: 'center', alignItems: 'center', borderRadius:8}}>
+                  <TouchableOpacity 
+                  onPress={() => this.follow()}
+                  style={{width: '90%', height: 35, backgroundColor: '#007aff', justifyContent: 'center', alignItems: 'center', borderRadius:8}}>
                       <Text style={{fontWeight: 'bold', fontSize:18, margin:5, color: 'white'}}>Follow</Text>
                   </TouchableOpacity>
                 </View>
@@ -111,7 +123,7 @@ class ProfileScreen extends React.Component {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ getUser }, dispatch)
+    return bindActionCreators({ getUser, followUser, unFollowUser }, dispatch)
 }
 
 const mapStateToProps = (state) => {
