@@ -22,7 +22,7 @@ export default class PostComponent extends React.Component {
     }
 
     likePost = () => {
-        if((this.props.item.likes.includes(this.props.user.uid)) || this.state.liked == true){
+        if((this.props.item?.likes.includes(this.props.user.uid)) || this.state.liked == true){
             if(this.state.liked == false){
                 this.setState({liked: true})
                 this.setState({numLike:this.state.numLike+1})
@@ -62,17 +62,17 @@ export default class PostComponent extends React.Component {
                 <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('ProfileScreen', this.props.item.uid)} 
                 style={{justifyContent: 'center', alignItems: 'center', flexDirection: 'row',}}>
-                    <Image source={{uri: this.props.item.photo}} style={{width:40, height:40, borderRadius:20, margin:15}} />
-                    <Text style={{fontWeight: '400', fontSize:16}}>{this.props.item.username}</Text>
+                    <Image source={{uri: this.props.item?.photo}} style={{width:40, height:40, borderRadius:20, margin:15}} />
+                    <Text style={{fontWeight: '400', fontSize:16}}>{this.props.item?.username}</Text>
                 </TouchableOpacity>
-                <Text style={{margin:15}}>{moment(this.props.item.date).format('ll')}</Text>
+                <Text style={{margin:15}}>{moment(this.props.item?.date).format('ll')}</Text>
             </View>
             <View>
             <ScrollView 
                 horizontal={true}
                 pagingEnabled={true}>
                 {
-                    this.props.item.photos?.map(e=>
+                    this.props.item?.photos.map(e=>
                         <Image source={{uri: e}} style={{width:screenWidth, height:360,}} />
                     )
                 }
@@ -85,7 +85,7 @@ export default class PostComponent extends React.Component {
                     <TouchableOpacity
                     onPress={() => this.likePost()}>
                         {
-                            (this.props.item.likes.includes(this.props.user.uid) && this.state.liked == undefined)
+                            (this.props.item?.likes?.includes(this.props.user.uid) && this.state.liked == undefined)
                             ?
                             <Image source={require('../../assets/images/red.png')} style={{width: 25, height:25, margin:10}} />
                             :
@@ -101,7 +101,7 @@ export default class PostComponent extends React.Component {
               </View>
               <TouchableOpacity onPress={() => this.savePost()}>
                 {
-                    (this.props.item.savedBy.includes(this.props.user.uid) && this.state.saved == undefined)
+                    (this.props.item?.savedBy.includes(this.props.user.uid) && this.state.saved == undefined)
                     ?
                     <Image source={require('../../assets/images/saved.png')} style={{width: 25, height:25, margin:10}} />
                     :
@@ -112,24 +112,24 @@ export default class PostComponent extends React.Component {
                 }
               </TouchableOpacity>
           </View>
-          <Text style={{fontWeight: 'bold', marginHorizontal:10, marginTop:5}}>{this.props.item.likes.length + this.state.numLike} likes</Text>
+          <Text style={{fontWeight: 'bold', marginHorizontal:10, marginTop:5}}>{this.props.item?.likes.length + this.state.numLike} likes</Text>
           
           <View style={{flexDirection: 'row', marginTop:5}}>
-                <Text style={{fontWeight: 'bold', marginLeft:10}}>{this.props.item.username} </Text>
-                <Text>{this.props.item.description}</Text>
+                <Text style={{fontWeight: 'bold', marginLeft:10}}>{this.props.item?.username} </Text>
+                <Text>{this.props.item?.description}</Text>
           </View>
           <TouchableOpacity>
-                <Text style={{marginHorizontal:10, color:'grey', marginTop:5}}>Show all the comments: {this.props.item.comments.length}</Text>
+                <Text style={{marginHorizontal:10, color:'grey', marginTop:5}}>Show all the comments: {this.props.item?.comments.length}</Text>
           </TouchableOpacity>
 
           <View style={{justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row'}}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Image source={{uri: this.props.item.photo}} style={{width:40, height:40, borderRadius:20, marginHorizontal:10, marginTop:5}} />
+                <Image source={{uri: this.props.user.photo}} style={{width:40, height:40, borderRadius:20, marginHorizontal:10, marginTop:5}} />
                 <Text style={{color:'grey', marginTop:5}}>Add a comment...</Text>
             </View>
-            <Image source={require('../../assets/images/flame.png')} style={{width:25, height:25, margin: 15}} />
+            <Image source={require('../../assets/images/flame.png')} style={{width:25, height:25, marginHorizontal:40}} />
           </View>
-          <Text style={{color:'grey', margin:10}}>{moment(this.props.item.date).format('ll')}.</Text>
+          <Text style={{color:'grey', margin:10}}>{moment(this.props.item?.date).format('ll')}.</Text>
         </View>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions } from 'react-native';
+import * as firebase from 'firebase'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -12,6 +13,7 @@ class NotifyScreen extends React.Component {
     return (
       <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
             <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>Notifications</Text>
+            <TouchableOpacity onPress={() => firebase.auth().signOut()}>Logout</TouchableOpacity>
       </View>
     );
   }

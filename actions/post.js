@@ -167,7 +167,7 @@ export const unSavePost = (post) => {
     }
 }
 
-export const getPost = (posts) => {
+export const getPost = (post) => {
     return async (dispatch, getState) => {
         try {
             dispatch({type: 'GET_POST', payload: post})

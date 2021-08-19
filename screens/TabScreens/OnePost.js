@@ -11,6 +11,9 @@ import { getPost } from '../../actions/post'
 export class OnePost extends React.Component {
   
   render(){
+      this.props.navigation.setOptions({
+          title:this.props.post?.onePost?.username + "'s post"
+      })
     return (
             <PostComponent 
               item={this.props.post.onePost} 
