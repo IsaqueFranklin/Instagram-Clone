@@ -1,6 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase'
 import { StyleSheet, Text, Image, FlatList, ScrollView, TextInput, TouchableOpacity, View, Button, Dimensions } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -44,6 +45,8 @@ class ProfileScreen extends React.Component {
     if(params == undefined || params == this.props.user.uid){
       return (
         <ScrollView style={{flex: 1, backgroundColor: 'white', backgroundColor: 'white'}}>
+
+          <SafeAreaView>
             <View style={{width: '100%', height:120, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Image source={{uri: this.props.user?.photo}}  style={{width: 90, height:90, borderRadius:45, margin:20}} />
                 <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
@@ -93,7 +96,7 @@ class ProfileScreen extends React.Component {
 
             <FlatList
             numColumns={3}
-            data={this.props.profile.posts}
+            data={this.props.user.posts}
             keyExtractor={(item) => JSON.stringify(item.date) }
             style={{flex: 1}}
             renderItem={({item}) => 
@@ -103,6 +106,8 @@ class ProfileScreen extends React.Component {
                 </TouchableOpacity>
             }
             />
+
+          </SafeAreaView>
         </ScrollView>
       );
     } 

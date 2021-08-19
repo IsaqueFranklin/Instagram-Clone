@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions, SafeAreaView, Platform, Image } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions, Platform, Image } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { uploadPhoto } from '../../actions/index'
 import { updateNextPhoto, removeImage } from '../../actions/post'
 import { FontAwesome } from '@expo/vector-icons'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -59,11 +60,11 @@ class PostScreen extends React.Component {
   
   render(){
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#f5f5dc'}}>
-          <View style={(Platform.OS == 'ios' ? {width: screenWidth, height:55, borderBottomColor: 'grey', borderBottomWidth:1} : {width: screenWidth, height: 55, borderBottomColor:'blue', borderBottomWidth:1, marginTop:30, justifyContent: 'space-between', alignItems: 'center', flexDirection:'row'})}>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+          <View style={(Platform.OS == 'ios' ? {width: screenWidth, height:55, borderBottomColor: 'grey', borderBottomWidth:1} : {width: screenWidth, height: 55, borderBottomColor:'gray', borderBottomWidth:1, marginTop:30, justifyContent: 'space-between', alignItems: 'center', flexDirection:'row'})}>
               <Text style={{margin:10, fontWeight: 'bold', fontSize:22}}>Create a new post</Text>
               <TouchableOpacity style={{margin:10}}
-            st  onPress={() => this.uploadPost()}>
+                onPress={() => this.uploadPost()}>
                   <Text style={{margin:10, fontWeight: 'bold', fontSize:22, color:'#007aff'}}>Upload</Text>
               </TouchableOpacity>
           </View>

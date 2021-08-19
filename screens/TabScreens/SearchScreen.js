@@ -10,7 +10,7 @@ class SearchScreen extends React.Component {
   
   render(){
     return (
-      <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: '#f5f5dc'}}>
+      <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center',  backgroundColor: 'white'}}>
             <Text style={{fontSize:35, fontFamily: 'logo-font', marginVertical: 60, color: '#007aff'}}>Search</Text>
       </View>
     );
