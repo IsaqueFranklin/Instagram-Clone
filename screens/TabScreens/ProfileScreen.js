@@ -86,8 +86,8 @@ class ProfileScreen extends React.Component {
                 <View style={{height:60, width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
                   <TouchableOpacity 
                   onPress={() => this.follow()}
-                  style={{width: '90%', height: 35, backgroundColor: '#007aff', justifyContent: 'center', alignItems: 'center', borderRadius:8}}>
-                      <Text style={{fontWeight: 'bold', fontSize:18, margin:5, color: 'white'}}>Follow</Text>
+                  style={{width: '90%', height: 35, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderWidth:1, borderColor: 'grey', borderRadius:7, margin:screenWidth*0.0125}}>
+                      <Text style={{fontWeight: 'bold', fontSize:18, margin:5, color: 'black'}}>Edit profile</Text>
                   </TouchableOpacity>
                 </View>
 

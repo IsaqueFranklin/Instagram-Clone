@@ -35,7 +35,7 @@ class HomeScreen extends React.Component {
               </View>
             </View>
             <FlatList 
-            style={{marginTop:0,}}
+            refreshing={true}
             data={this.props.post.feed}
             keyExtractor={(item) => JSON.stringify(item.uid)}
             renderItem={({item}) => (
