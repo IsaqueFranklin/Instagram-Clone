@@ -1,6 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, FlatList, KeyboardAvoidingView, TouchableOpacity, View, Dimensions } from 'react-native';
-import * as firebase from 'firebase'
+import { StyleSheet, Text, TextInput, Platform, FlatList, KeyboardAvoidingView, TouchableOpacity, View, Dimensions } from 'react-native';
+import firebase from "firebase/app"
+import 'firebase/firestore'
+
+import { addMessage } from '../../../actions/post'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
@@ -12,7 +15,8 @@ class MessagesScreen extends React.Component {
   
 
     state = {
-        messages: []
+        messages: [],
+        message: ''
     }
 
 
@@ -23,7 +27,7 @@ class MessagesScreen extends React.Component {
         firebase.firestore()
         .collection('messages')
         .limit(50)
-        //.orderBy('date', 'desc')
+        .orderBy('date', 'desc')
         .onSnapshot(docs => {
             let messages = []
             docs.forEach(doc => {
@@ -31,6 +35,13 @@ class MessagesScreen extends React.Component {
             })
             this.setState({messages})
         })
+    };
+
+    sendMessage = () => {
+        if (this.state.message.replace(/\s/g, '').length) {
+            this.props.addMessage(this.state.message)
+            this.setState({message: ''})
+        }
     }
 
 
@@ -50,19 +61,36 @@ class MessagesScreen extends React.Component {
                     <Text>{item.message}</Text>
                 </View>
             )} />
-            <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', borderTopWidth:0.5, borderColor: 'gray', color: 'white'}}>
+            <View style={{width: '100%', flexDirection: 'row', alignItems: 'center', borderTopWidth:0.5, borderColor: 'gray', color: 'black'}}>
                 <TextInput 
                 style={{width:'85%', height:'50', paddingVertical:10, paddingHorizontal:20,}} 
-                onChangeText/>
+                onChangeText={(message) => this.setState({message})} 
+                value={this.state.message} 
+                returnKeyType='send'
+                placeHolder='Send message'
+                placeholderTextColor='gray'
+                onSubmitEditing={this.sendMessage} 
+                />
+
+                <TouchableOpacity
+                onPress={() => this.sendMessage()}>
+                    <Text style={[
+                        (!this.state.message.replace(/\s/g, '').length)
+                        ?
+                        {color: 'gray'}
+                        :
+                        {fontWeight: 'bold', color: 'black'}
+                    ]}>SEND</Text>
+                </TouchableOpacity>
             </View>
       </KeyboardAvoidingView>
     );
   }
-}
+};
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({  }, dispatch)
+    return bindActionCreators({ addMessage }, dispatch)
 }
 
 const mapStateToProps = (state) => {

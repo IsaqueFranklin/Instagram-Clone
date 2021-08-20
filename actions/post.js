@@ -176,3 +176,23 @@ export const getPost = (post) => {
         }
     }
 }
+
+export const addMessage = (text) => {
+    return (dispatch, getState) => {
+        const { uid, photo, username } = getState().user
+
+        try {
+            const message = {
+                message: text,
+                photo: photo,
+                username: username,
+                uid: uid,
+                date: new Date().getTime()
+            }
+
+            db.collection('messages').doc().set(message)
+        } catch(e) {
+            alert(e)
+        }
+    }
+}
